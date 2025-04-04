@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Tales - Destinations</title>
+    <style>
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #080808;
+            background-color: #f5f5f5;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #3a3a3a;
+            color: #ffffff;
+            padding: 16px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5em;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 0.5em;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #ff6f61;
+            border-radius: 5px;
+        }
+
+        .content {
+            padding: 3em;
+            margin-top: 110px; }
+
+        .popular-destinations {
+            display: flex;
+            gap: 2em;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .destination {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            width: 25%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .destination:hover {
+            transform: scale(1.05);
+        }
+
+        .destination img {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Explore the World with Travel Tales</h1>
+        <nav>
+            <a href="destinations.html">Destinations</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+        <h2>Popular Destinations</h2>
+        <div class="popular-destinations">
+            <div class="destination">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXMlMjBmcmFuY2V8ZW58MHx8MHx8fDA%3D" alt="Paris, France">
+                <h3>Paris, France</h3>
+                <p>The city of lights, romance, and history.</p>
+            </div>
+            <div class="destination">
+                <img src="https://plus.unsplash.com/premium_photo-1668061706855-26d4cf0f6248?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dG9reW98ZW58MHx8MHx8fDA%3D" alt="Tokyo, Japan">
+                <h3>Tokyo, Japan</h3>
+                <p>A vibrant city blending tradition and modernity.</p>
+            </div>
+            <div class="destination">
+                <img src="https://media.istockphoto.com/id/1365467747/photo/the-statue-of-liberty-seen-from-new-york-harbor.webp?a=1&b=1&s=612x612&w=0&k=20&c=r7rYaAsc5NKu2u2tt7fVpfCQOWFhPGYN0At8XoIAYRU=" alt="New York, USA">
+                <h3>New York, USA</h3>
+                <p>The city that never sleeps, full of life and culture.</p>
+            </div>
+            <div class="destination">
+                <img src="https://images.unsplash.com/photo-1587135941948-670b381f08ce?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8VGFqJTIwTWFoYWwlMjBJbmRpYXxlbnwwfHwwfHx8MA%3D%3D" alt="Taj Mahal, India">
+                <h3>Taj Mahal, India</h3>
+                <p>The seventh wonder of the world.</p>
+            </div>
+            <div class="destination">
+                <img src="https://media.istockphoto.com/id/491697238/photo/maldives-beach.webp?a=1&b=1&s=612x612&w=0&k=20&c=wSwOGblq48q6BMRNZjvO2NKW-YtZSS1HEmzLPCOEvys=" alt="Safari Island, Maldives">
+                <h3>Safari Island, Maldives</h3>
+                <p>An island with overwater villas.</p>
+            </div>
+            <div class="destination">
+                <img src="https://images.unsplash.com/photo-1565019001609-0e34a6a22189?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fE1lY2NhJTIwU2F1ZGklMjBBcmFiaWF8ZW58MHx8MHx8fDA%3D" alt="Mecca, Saudi Arabia">
+                <h3>Mecca, Saudi Arabia</h3>
+                <p>A holy place for Muslims.</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
