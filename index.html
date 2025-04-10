@@ -3,161 +3,808 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel tales Adventures - Explore the World</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <title>Travel Tales - Your Journey Begins Here</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1920&auto=format&fit=crop') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f6ad55;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2d3748;
+            margin: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0.5rem auto;
+        }
+
+        .featured-destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-card-content {
+            padding: 2rem;
+        }
+
+        .destination-card-content h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .destination-card-content p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .destination-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .destination-rating {
+            color: #f6ad55;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem;
+            color: white;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .travel-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tip-content {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .testimonial-location {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn.outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: #f6ad55;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ed8936;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+                padding: 0 1rem;
+            }
+
+            .featured-destinations {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .categories {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .destination-card-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .category-overlay h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .search-bar {
+                margin: 1.5rem auto;
+            }
+
+            .search-bar input {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .featured-destinations,
+            .categories,
+            .travel-tips,
+            .testimonials {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .destination-card img {
+                height: 200px;
+            }
+
+            .category-card {
+                height: 250px;
+            }
+
+            .tip-card,
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 3rem 0 1.5rem;
+            }
+
+            .destination-card-content {
+                padding: 1.5rem;
+            }
+
+            .destination-card-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .destination-meta {
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .category-overlay {
+                padding: 1.5rem;
+            }
+
+            .category-overlay h3 {
+                font-size: 1.2rem;
+            }
+
+            .category-overlay p {
+                font-size: 0.8rem;
+            }
+
+            .tip-icon {
+                font-size: 1.8rem;
+            }
+
+            .tip-title {
+                font-size: 1.1rem;
+            }
+
+            .tip-content {
+                font-size: 0.9rem;
+            }
+
+            .testimonial-content {
+                font-size: 0.9rem;
+            }
+
+            .testimonial-author {
+                font-size: 0.9rem;
+            }
+
+            .testimonial-location {
+                font-size: 0.8rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-section p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Add smooth scrolling for better mobile experience */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Improve touch targets on mobile */
+        @media (max-width: 768px) {
+            .nav-links a,
+            .footer-links a,
+            .btn,
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Add loading state for images */
+        .destination-card img,
+        .category-card img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .destination-card img.loaded,
+        .category-card img.loaded {
+            opacity: 1;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.destination-card img, .category-card img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        img.classList.add('loaded');
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
-        <nav class="container">
-            <a href="#" class="logo">Travel tales Adventures</a>
+        <div class="hero-content">
+            <h1>Travel Tales</h1>
+            <p>Where Every Journey Tells a Story</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Where would you like to explore?">
+            </div>
+            <nav>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#login-signup">Login</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="travel-guides.html">Travel Guides</a></li>
+                    <li><a href="travel-tips.html">Travel Tips</a></li>
+                    <li><a href="traveler-stories.html">Traveler Stories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                    <li><a href="login.html" class="login-link">Login</a></li>
             </ul>
         </nav>
+        </div>
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Escape the Ordinary, Explore the Extraordinary!</h1>
-                <p>Discover breathtaking destinations and create unforgettable memories on your next adventure</p>
-                <a href="#destinations" class="btn">Start Your Journey</a>
-            </div>
-        </section>
-        <section id="login-signup" class="login-signup">
             <div class="container">
-              <div class="row" style="margin-top: 80px;">
-                  <div class="center">
-                      <h1 class="title">Welcome</h1>
-                  </div>
-              </div>
-              <div class="row" style="margin-top: 15px;">
-                  <div class="col-12 center">
-                      <input type="text" placeholder="Email address">
-                  </div>
-              </div>
-              <div class="row" style="margin-top: 20px;">
-                  <div>
-                      <div class="col-12 center">
-                          <button class="continue">Continue</button>
-                      </div>
-                  </div>
-              </div>
-              <div class="row" style="margin-top: 8px;">
-                  <div>
-                      <div class="col-12 center">
-                          <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-                          <p><a href="forgot-password.html" class="forgot-password">/Forgot Password?</a></p>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div>
-                      <div class="col-12 center">
-                          <hr style="width: 160px; margin-right: 10px;">OR
-                          <hr style="width: 160px; margin-left: 10px;">
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </section>
-        <section id="destinations" class="destinations">
-            <div class="container">
-                <h2 class="section-title">Popular Destinations</h2>
-                <div class="destination-grid">
-                    <div class="destination-card" data-aos="fade-up">
-                        <img src="https://images.pexels.com/photos/1488315/pexels-photo-1488315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Paris">
+            <h2 class="section-title">Featured Destinations</h2>
+            <div class="featured-destinations">
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop" alt="Paris">
                         <div class="destination-card-content">
                             <h3>Paris, France</h3>
-                            <p>Experience the romance and charm of the City of Light. Explore iconic landmarks and indulge in exquisite cuisine.</p>
+                        <div class="destination-meta">
+                            <span class="destination-rating">★★★★★ 4.9</span>
+                            <span>Europe</span>
                         </div>
+                        <p>Experience the romance of the City of Light. From the iconic Eiffel Tower to charming cafés and world-class museums.</p>
+                        <a href="destination-details.html?city=paris" class="btn">Explore Guide</a>
                     </div>
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="200">
-                        <img src="https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bali">
-                        <div class="destination-card-content">
-                            <h3>Bali, Indonesia</h3>
-                            <p>Relax on pristine beaches, explore lush rice terraces, and immerse yourself in Balinese culture.</p>
                         </div>
+
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop" alt="Tokyo">
+                        <div class="destination-card-content">
+                        <h3>Tokyo, Japan</h3>
+                        <div class="destination-meta">
+                            <span class="destination-rating">★★★★★ 4.8</span>
+                            <span>Asia</span>
+                        </div>
+                        <p>Dive into a fascinating blend of ultra-modern technology and traditional culture in Japan's dynamic capital.</p>
+                        <a href="destination-details.html?city=tokyo" class="btn">Explore Guide</a>
                     </div>
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="New York">
+                </div>
+
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=800&auto=format&fit=crop" alt="Santorini">
                         <div class="destination-card-content">
-                            <h3>New York City, USA</h3>
-                            <p>Explore the vibrant streets of the Big Apple. From world-class museums to Broadway shows, experience the city that never sleeps.</p>
+                        <h3>Santorini, Greece</h3>
+                        <div class="destination-meta">
+                            <span class="destination-rating">★★★★★ 4.9</span>
+                            <span>Europe</span>
                         </div>
-                    </div>
-                    <div class="destination-card" data-aos="fade-up" data-aos-delay="600">
-                        <img src="https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tokyo">
-                        <div class="destination-card-content">
-                            <h3>Tokyo, Japan</h3>
-                            <p>Discover the perfect blend of tradition and modernity. Immerse yourself in Japanese culture, cuisine, and cutting-edge technology.</p>
-                            <a href="#" class="btn">Discover Tokyo</a>
-                        </div>
+                        <p>Discover the magic of white-washed buildings, blue domes, and the most spectacular sunsets in the Mediterranean.</p>
+                        <a href="destination-details.html?city=santorini" class="btn">Explore Guide</a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2 class="section-title">About Us</h2>
-                <div class="about-content">
-                    <div class="about-image" data-aos="fade-right">
-                        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/sites/132077/images/rwCVqz5yRNuqVIYqFsrY_about-us-612x612.jpg" alt="About Travel tales Adventures">
+            <h2 class="section-title">Explore by Category</h2>
+            <div class="categories">
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=800&auto=format&fit=crop" alt="Cities">
+                    <div class="category-overlay">
+                        <h3>Cities</h3>
+                        <p>Urban adventures and cultural experiences</p>
                     </div>
-                    <div class="about-text" data-aos="fade-left">
-                        <p>Travel tales Adventures is a premier travel company dedicated to providing unforgettable experiences for adventurers around the world. With over 10 years of expertise, we offer tailor-made journeys that cater to your individual preferences and interests.</p>
-                        <p>Our team of experienced travel professionals is passionate about creating tailor-made journeys that cater to your individual preferences and interests. Whether you're seeking a romantic getaway, a family adventure, or a solo expedition, we have the perfect trip for you.</p>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800&auto=format&fit=crop" alt="Beaches">
+                    <div class="category-overlay">
+                        <h3>Beaches</h3>
+                        <p>Sun, sand, and relaxation</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" alt="Mountains">
+                    <div class="category-overlay">
+                        <h3>Mountains</h3>
+                        <p>Hiking and breathtaking views</p>
+                    </div>
+                    </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=800&auto=format&fit=crop" alt="Historical">
+                    <div class="category-overlay">
+                        <h3>Historical</h3>
+                        <p>Ancient ruins and cultural heritage</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="testimonials" class="testimonials">
-            <div class="container">
-                <h2 class="section-title">What Our Travelers Say</h2>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card" data-aos="zoom-in">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
-                        <p>"Travel tales Adventures made our honeymoon absolutely perfect! Every detail was taken care of, and we couldn't have asked for a better experience. The personalized itinerary was exactly what we wanted, and the on-ground support was exceptional."</p>
-                        <h4>Sarah Johnson</h4>
-                    </div>
-                    <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
-                        <p>"I've traveled with many companies, but none compare to the level of service and attention to detail provided by Travel tales Adventures. Their local guides were knowledgeable and friendly, making our trip truly memorable."</p>
-                        <h4>Michael Chen</h4>
-                    </div>
-                    <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="400">
-                        <img src="https://randomuser.me/api/portraits/women/30.jpg" alt="Rahab Riziki">
-                        <p>"Our family vacation was a dream come true thanks to Travel tales Adventures. The kids had a blast, and we created memories that will last a lifetime. The balance of activities and relaxation was perfect."</p>
-                        <h4>Rahab Riziki</h4>
-                    </div>
+            <h2 class="section-title">Travel Tips</h2>
+            <div class="travel-tips">
+                <div class="tip-card">
+                    <div class="tip-icon">✈️</div>
+                    <h3 class="tip-title">Flight Booking Tips</h3>
+                    <p class="tip-content">
+                        Book flights 3-4 months in advance, use incognito mode when searching, be flexible with dates, and sign up for price alerts.
+                    </p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🏨</div>
+                    <h3 class="tip-title">Accommodation Hacks</h3>
+                    <p class="tip-content">
+                        Read recent reviews carefully, book with free cancellation, contact hosts directly, and check location safety.
+                    </p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💰</div>
+                    <h3 class="tip-title">Budget Management</h3>
+                    <p class="tip-content">
+                        Set daily spending limits, use local transportation, cook some meals yourself, and find free attractions.
+                    </p>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <div>
-            <div class="row" style="margin-top: 430px;">
-                <div>
-                    <div class="col-12 center">
-                        <p style="color: #10a37f;"><a href="terms-of-use.html">Terms of Use</a> </p>
-                    </div>
+            <h2 class="section-title">Traveler Stories</h2>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Travel Tales made planning my trip to Japan so much easier! Their Tokyo guide helped me discover hidden gems I would have otherwise missed."</p>
+                    <div class="testimonial-author">Amara Okafor</div>
+                    <div class="testimonial-location">Lagos, Nigeria</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"The tips about local transportation saved me hundreds on my European tour. I've been recommending Travel Tales to all my friends!"</p>
+                    <div class="testimonial-author">Miguel Santana</div>
+                    <div class="testimonial-location">Madrid, Spain</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"As a solo female traveler, the safety tips were invaluable. My trip to Bali was incredible and stress-free thanks to Travel Tales' guidance."</p>
+                    <div class="testimonial-author">Emma Chen</div>
+                    <div class="testimonial-location">Toronto, Canada</div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Start Your Adventure?</h2>
+                <p>Explore our comprehensive travel guides, discover new destinations, and get expert tips for your next journey.</p>
+                <div class="cta-buttons">
+                    <a href="destinations.html" class="cta-btn">Explore Destinations</a>
+                    <a href="travel-guides.html" class="cta-btn outline">View Travel Guides</a>
                 </div>
             </div>
         </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="travel-guides.html">Travel Guides</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+            </div>
+            <p><a href="terms-of-use.html">Terms of Use</a></p>
+        </div>
     </footer>
+    <script src="js/chatbot-widget.js"></script>
 </body>
 </html>

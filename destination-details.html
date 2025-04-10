@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Details - Travel Tales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1920&auto=format&fit=crop') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f6ad55;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .destination-hero {
+            position: relative;
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .destination-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+
+        .destination-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .destination-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .destination-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .main-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .attractions-list {
+            list-style: none;
+        }
+
+        .attractions-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .attractions-list li::before {
+            content: '•';
+            color: #667eea;
+            position: absolute;
+            left: 0;
+        }
+
+        .weather-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .weather-card {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .weather-card i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #f6ad55;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ed8936;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .destination-hero {
+                height: 40vh;
+            }
+
+            .destination-hero h1 {
+                font-size: 2rem;
+            }
+
+            .destination-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-btn i {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="travel-guides.html">Travel Guides</a></li>
+                <li><a href="travel-tips.html">Travel Tips</a></li>
+                <li><a href="traveler-stories.html">Traveler Stories</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="login-link">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 2rem;">
+        <a href="booking.html" class="back-btn">
+            <i class="fas fa-calendar-alt"></i> Book Your Trip
+        </a>
+    </div>
+
+    <div class="destination-hero" id="destinationHero">
+        <div class="destination-hero-content">
+            <h1 id="destinationTitle">Loading...</h1>
+            <div class="destination-meta">
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="destinationLocation">Loading...</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-star"></i>
+                    <span id="destinationRating">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="section">
+                    <h2>About</h2>
+                    <p id="destinationDescription">Loading...</p>
+                </div>
+
+                <div class="section">
+                    <h2>Top Attractions</h2>
+                    <ul class="attractions-list" id="attractionsList">
+                        <li>Loading attractions...</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Photo Gallery</h2>
+                    <div class="gallery" id="photoGallery">
+                        <!-- Photos will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h2>Weather</h2>
+                    <div class="weather-info" id="weatherInfo">
+                        <!-- Weather info will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h2>Quick Facts</h2>
+                    <div id="quickFacts">
+                        <!-- Quick facts will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h2>Plan Your Trip</h2>
+                    <p>Ready to explore? Start planning your adventure today!</p>
+                    <a href="#" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><a href="terms-of-use.html">Terms of Use</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Get destination from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get('city');
+
+        // Destination data (in a real application, this would come from a database)
+        const destinations = {
+            paris: {
+                title: 'Paris, France',
+                location: 'Europe',
+                rating: '4.9/5',
+                description: 'Paris, France\'s capital, is a major European city and a global center for art, fashion, gastronomy and culture. Its 19th-century cityscape is crisscrossed by wide boulevards and the River Seine. Beyond such landmarks as the Eiffel Tower and the 12th-century, Gothic Notre-Dame cathedral, the city is known for its cafe culture and designer boutiques along the Rue du Faubourg Saint-Honoré.',
+                attractions: [
+                    'Eiffel Tower',
+                    'Louvre Museum',
+                    'Notre-Dame Cathedral',
+                    'Arc de Triomphe',
+                    'Champs-Élysées',
+                    'Seine River Cruise',
+                    'Montmartre',
+                    'Palace of Versailles'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34',
+                    'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f',
+                    'https://images.unsplash.com/photo-1525401130044-8aad6a1f7f1b',
+                    'https://images.unsplash.com/photo-1503917988258-f87a78e3c995',
+                    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+                    'https://images.unsplash.com/photo-1512303452027-1b0e7b9c8a56'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '15°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '25°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '12°C', icon: 'fa-cloud' },
+                    { season: 'Winter', temp: '5°C', icon: 'fa-snowflake' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'April to October',
+                    'Language': 'French',
+                    'Currency': 'Euro (EUR)',
+                    'Time Zone': 'CET (UTC+1)'
+                }
+            },
+            tokyo: {
+                title: 'Tokyo, Japan',
+                location: 'Asia',
+                rating: '4.8/5',
+                description: 'Dive into a fascinating blend of ultra-modern technology and traditional culture in Japan\'s dynamic capital.',
+                attractions: [
+                    'Shibuya Crossing',
+                    'Tokyo Tower',
+                    'Senso-ji Temple',
+                    'Akihabara',
+                    'Tsukiji Market',
+                    'Meiji Shrine',
+                    'Ueno Park',
+                    'Tokyo Skytree'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf',
+                    'https://images.unsplash.com/photo-1516542076529-1ea3854896f0',
+                    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+                    'https://images.unsplash.com/photo-1512303452027-1b0e7b9c8a56',
+                    'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f',
+                    'https://images.unsplash.com/photo-1525401130044-8aad6a1f7f1b'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '16°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '28°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '18°C', icon: 'fa-cloud' },
+                    { season: 'Winter', temp: '5°C', icon: 'fa-snowflake' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'March to May',
+                    'Language': 'Japanese',
+                    'Currency': 'Yen (JPY)',
+                    'Time Zone': 'JST (UTC+9)'
+                }
+            },
+            santorini: {
+                title: 'Santorini, Greece',
+                location: 'Europe',
+                rating: '4.9/5',
+                description: 'Discover the magic of white-washed buildings, blue domes, and the most spectacular sunsets in the Mediterranean. This crescent-shaped island is famous for its dramatic views, stunning architecture, and rich history dating back to ancient times.',
+                attractions: [
+                    'Oia Sunset Point',
+                    'Fira Town',
+                    'Red Beach',
+                    'Akrotiri Archaeological Site',
+                    'Santo Wines Winery',
+                    'Amoudi Bay',
+                    'Perissa Black Sand Beach',
+                    'Ancient Thera'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff',
+                    'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e',
+                    'https://images.unsplash.com/photo-1555400038-63f5ba517a47',
+                    'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a',
+                    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+                    'https://images.unsplash.com/photo-1512303452027-1b0e7b9c8a56'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '20°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '30°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '23°C', icon: 'fa-cloud-sun' },
+                    { season: 'Winter', temp: '15°C', icon: 'fa-cloud' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'May to September',
+                    'Language': 'Greek',
+                    'Currency': 'Euro (EUR)',
+                    'Time Zone': 'EET (UTC+2)'
+                }
+            },
+            newyork: {
+                title: 'New York City, USA',
+                location: 'North America',
+                rating: '4.7/5',
+                description: 'Experience the vibrant energy of the city that never sleeps. From iconic skyscrapers and world-class museums to diverse neighborhoods and endless entertainment options, New York City offers something for everyone.',
+                attractions: [
+                    'Times Square',
+                    'Central Park',
+                    'Statue of Liberty',
+                    'Empire State Building',
+                    'Broadway Shows',
+                    'Metropolitan Museum of Art',
+                    'Brooklyn Bridge',
+                    'High Line'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2',
+                    'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9',
+                    'https://images.unsplash.com/photo-1522083165195-3424ed129620',
+                    'https://images.unsplash.com/photo-1500916434205-0c77489c6cf7',
+                    'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f',
+                    'https://images.unsplash.com/photo-1525401130044-8aad6a1f7f1b'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '15°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '28°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '17°C', icon: 'fa-cloud' },
+                    { season: 'Winter', temp: '2°C', icon: 'fa-snowflake' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'April to June or September to November',
+                    'Language': 'English',
+                    'Currency': 'US Dollar (USD)',
+                    'Time Zone': 'EST (UTC-5)'
+                }
+            },
+            capetown: {
+                title: 'Cape Town, South Africa',
+                location: 'Africa',
+                rating: '4.8/5',
+                description: 'Where mountains meet the sea, Cape Town offers stunning landscapes, rich culture, and diverse wildlife experiences. From Table Mountain to pristine beaches and world-class wineries, this city captivates visitors with its natural beauty and vibrant atmosphere.',
+                attractions: [
+                    'Table Mountain',
+                    'Robben Island',
+                    'V&A Waterfront',
+                    'Cape Point',
+                    'Boulders Beach',
+                    'Kirstenbosch Gardens',
+                    'Bo-Kaap',
+                    'Camps Bay'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5',
+                    'https://images.unsplash.com/photo-1580060839134-75a5edca2e99',
+                    'https://images.unsplash.com/photo-1553570739-330b8db8a925',
+                    'https://images.unsplash.com/photo-1546026423-cc4642628d2b',
+                    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+                    'https://images.unsplash.com/photo-1512303452027-1b0e7b9c8a56'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '20°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '25°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '21°C', icon: 'fa-cloud-sun' },
+                    { season: 'Winter', temp: '16°C', icon: 'fa-cloud-rain' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'October to April',
+                    'Language': 'English, Afrikaans, Xhosa',
+                    'Currency': 'South African Rand (ZAR)',
+                    'Time Zone': 'SAST (UTC+2)'
+                }
+            },
+            venice: {
+                title: 'Venice, Italy',
+                location: 'Europe',
+                rating: '4.9/5',
+                description: 'Experience the timeless charm of Venice, a city built on water. Navigate through picturesque canals, discover historic architecture, and immerse yourself in the rich cultural heritage of this unique Italian destination.',
+                attractions: [
+                    'St. Mark\'s Basilica',
+                    'Rialto Bridge',
+                    'Doge\'s Palace',
+                    'Grand Canal',
+                    'Murano Island',
+                    'Burano Island',
+                    'Gondola Rides',
+                    'Bridge of Sighs'
+                ],
+                photos: [
+                    'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9',
+                    'https://images.unsplash.com/photo-1514890547357-a9ee288728e0',
+                    'https://images.unsplash.com/photo-1533676802871-eca1ae998cd5',
+                    'https://images.unsplash.com/photo-1520175480921-4edfa2983e0f',
+                    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+                    'https://images.unsplash.com/photo-1512303452027-1b0e7b9c8a56'
+                ],
+                weather: [
+                    { season: 'Spring', temp: '17°C', icon: 'fa-cloud-sun' },
+                    { season: 'Summer', temp: '27°C', icon: 'fa-sun' },
+                    { season: 'Autumn', temp: '18°C', icon: 'fa-cloud' },
+                    { season: 'Winter', temp: '8°C', icon: 'fa-cloud-rain' }
+                ],
+                quickFacts: {
+                    'Best Time to Visit': 'April to May or September to October',
+                    'Language': 'Italian',
+                    'Currency': 'Euro (EUR)',
+                    'Time Zone': 'CET (UTC+1)'
+                }
+            }
+        };
+
+        // Load destination data
+        function loadDestination() {
+            const destination = destinations[city];
+            if (!destination) {
+                window.location.href = 'destinations.html';
+                return;
+            }
+
+            // Update hero section
+            document.getElementById('destinationTitle').textContent = destination.title;
+            document.getElementById('destinationLocation').textContent = destination.location;
+            document.getElementById('destinationRating').textContent = destination.rating;
+            document.getElementById('destinationHero').style.backgroundImage = `url(${destination.photos[0]})`;
+
+            // Update description
+            document.getElementById('destinationDescription').textContent = destination.description;
+
+            // Update attractions
+            const attractionsList = document.getElementById('attractionsList');
+            attractionsList.innerHTML = destination.attractions
+                .map(attraction => `<li>${attraction}</li>`)
+                .join('');
+
+            // Update photo gallery
+            const gallery = document.getElementById('photoGallery');
+            gallery.innerHTML = destination.photos
+                .map(photo => `<img src="${photo}" alt="${destination.title}">`)
+                .join('');
+
+            // Update weather info
+            const weatherInfo = document.getElementById('weatherInfo');
+            weatherInfo.innerHTML = destination.weather
+                .map(weather => `
+                    <div class="weather-card">
+                        <i class="fas ${weather.icon}"></i>
+                        <div>${weather.season}</div>
+                        <div>${weather.temp}</div>
+                    </div>
+                `)
+                .join('');
+
+            // Update quick facts
+            const quickFacts = document.getElementById('quickFacts');
+            quickFacts.innerHTML = Object.entries(destination.quickFacts)
+                .map(([key, value]) => `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>${key}:</strong> ${value}
+                    </div>
+                `)
+                .join('');
+        }
+
+        // Load destination when page loads
+        window.addEventListener('load', loadDestination);
+    </script>
+</body>
+</html> 

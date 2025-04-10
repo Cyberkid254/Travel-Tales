@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveler Stories - Travel Tales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0 0;
+            flex-wrap: wrap;
+        }
+        .nav-links li {
+            margin: 0.5rem 1rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #f6ad55;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+        .story-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .story-content {
+            padding: 1.5rem;
+        }
+        .story-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .story-meta i {
+            color: #764ba2;
+        }
+        .story-title {
+            margin: 0 0 1rem;
+            color: #2d3748;
+            font-size: 1.25rem;
+        }
+        .story-excerpt {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        .read-more:hover {
+            transform: translateX(5px);
+        }
+        @media (max-width: 768px) {
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Travel Tales</h1>
+        <p>Where Every Journey Tells a Story</p>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="travel-guides.html">Travel Guides</a></li>
+            <li><a href="travel-tips.html">Travel Tips</a></li>
+            <li><a href="traveler-stories.html" class="active">Traveler Stories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-link">Login</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <div class="stories-grid">
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?kenya-safari" alt="Safari in Kenya" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Sarah Johnson</span>
+                        <span><i class="fas fa-calendar"></i> June 15, 2023</span>
+                    </div>
+                    <h3 class="story-title">Safari Adventures in Kenya</h3>
+                    <p class="story-excerpt">Witnessing the great migration in the Maasai Mara was a life-changing experience. The endless savannah stretched before us...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?japan-temple" alt="Japanese Temple" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Mike Chen</span>
+                        <span><i class="fas fa-calendar"></i> May 28, 2023</span>
+                    </div>
+                    <h3 class="story-title">Lost in Kyoto's Ancient Streets</h3>
+                    <p class="story-excerpt">Exploring the narrow alleyways of Gion, I discovered hidden temples and traditional tea houses that seemed frozen in time...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?santorini" alt="Santorini Sunset" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Elena Papadopoulos</span>
+                        <span><i class="fas fa-calendar"></i> July 3, 2023</span>
+                    </div>
+                    <h3 class="story-title">Sunset Magic in Santorini</h3>
+                    <p class="story-excerpt">The white-washed buildings contrasted perfectly with the deep blue Aegean Sea. As the sun set, the sky exploded in colors...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?amazon-rainforest" alt="Amazon Rainforest" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Carlos Rivera</span>
+                        <span><i class="fas fa-calendar"></i> June 20, 2023</span>
+                    </div>
+                    <h3 class="story-title">Amazon Rainforest Adventure</h3>
+                    <p class="story-excerpt">Deep in the Amazon, we discovered a world teeming with life. The sounds of the jungle at night were unlike anything...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?iceland-waterfall" alt="Iceland Waterfall" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Anna Bergsson</span>
+                        <span><i class="fas fa-calendar"></i> July 10, 2023</span>
+                    </div>
+                    <h3 class="story-title">Iceland's Hidden Waterfalls</h3>
+                    <p class="story-excerpt">Following a local's tip, we discovered a secluded waterfall away from the tourist trails. The raw power of nature...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <img src="https://source.unsplash.com/800x600/?morocco-market" alt="Morocco Market" class="story-image">
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Youssef Amrani</span>
+                        <span><i class="fas fa-calendar"></i> June 5, 2023</span>
+                    </div>
+                    <h3 class="story-title">Colors of Marrakech</h3>
+                    <p class="story-excerpt">The medina's narrow streets were a sensory overload of spices, textiles, and craftsmanship. Every corner held a new surprise...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <script>
+        // Add loading state for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.story-image');
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
+                img.addEventListener('load', function() {
+                    img.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

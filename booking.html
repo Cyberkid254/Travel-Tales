@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip - Travel Tales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1920&auto=format&fit=crop') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #f6ad55;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .booking-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .flight-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .flight-table th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .flight-table td {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .flight-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .book-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filters-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group select {
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .sort-btn {
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sort-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .sort-btn i {
+            font-size: 0.8rem;
+        }
+
+        .price-highlight {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .stop-badge {
+            padding: 0.25rem 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+
+        .direct-flight {
+            color: #48bb78;
+        }
+
+        .one-stop {
+            color: #ed8936;
+        }
+
+        .two-stop {
+            color: #e53e3e;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .flight-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book Your Trip</h1>
+        <p>Find and book the perfect flight for your next adventure</p>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="travel-guides.html">Travel Guides</a></li>
+            <li><a href="travel-tips.html">Travel Tips</a></li>
+            <li><a href="traveler-stories.html">Traveler Stories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-link">Login</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <div class="back-button">
+            <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+        
+        <div class="booking-section">
+            <h2 class="section-title">Search Flights</h2>
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="departure">From</label>
+                    <input type="text" id="departure" placeholder="Departure City" value="Nairobi">
+                </div>
+                <div class="form-group">
+                    <label for="arrival">To</label>
+                    <input type="text" id="arrival" placeholder="Arrival City">
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="passengers">Passengers</label>
+                    <select id="passengers">
+                        <option value="1">1 Passenger</option>
+                        <option value="2">2 Passengers</option>
+                        <option value="3">3 Passengers</option>
+                        <option value="4">4+ Passengers</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-btn">Search Flights</button>
+            </form>
+        </div>
+
+        <div class="booking-section">
+            <h2 class="section-title">Available Flights from Nairobi</h2>
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label for="airline-filter">Airline:</label>
+                    <select id="airline-filter">
+                        <option value="all">All Airlines</option>
+                        <option value="Kenya Airways">Kenya Airways</option>
+                        <option value="Etihad Airways">Etihad Airways</option>
+                        <option value="Ethiopia Airlines">Ethiopia Airlines</option>
+                        <option value="GoAir">GoAir</option>
+                        <option value="Qatar Airlines">Qatar Airlines</option>
+                        <option value="AirAsia">AirAsia</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="stops-filter">Stops:</label>
+                    <select id="stops-filter">
+                        <option value="all">All</option>
+                        <option value="direct">Direct</option>
+                        <option value="1-stop">1 Stop</option>
+                        <option value="2-stop">2 Stops</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price Range:</label>
+                    <select id="price-filter">
+                        <option value="all">All Prices</option>
+                        <option value="0-1000">Under $1,000</option>
+                        <option value="1000-1500">$1,000 - $1,500</option>
+                        <option value="1500-2000">$1,500 - $2,000</option>
+                        <option value="2000+">$2,000+</option>
+                    </select>
+                </div>
+                <button class="sort-btn" id="sort-price">
+                    Sort by Price <i class="fas fa-sort"></i>
+                </button>
+                <button class="sort-btn" id="sort-duration">
+                    Sort by Duration <i class="fas fa-sort"></i>
+                </button>
+            </div>
+            <table class="flight-table">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Airport Code</th>
+                        <th>Airline</th>
+                        <th>Flight Duration</th>
+                        <th>Ticket Price (INR)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paris</td>
+                        <td>CDG</td>
+                        <td>Kenya Airways</td>
+                        <td>18h 15m</td>
+                        <td>1,626$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo</td>
+                        <td>HND</td>
+                        <td>Etihad Airways</td>
+                        <td>16h 45m (2 stop)</td>
+                        <td>1,500$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Saudi Arabia</td>
+                        <td>JED</td>
+                        <td>Ethiopia Airlines</td>
+                        <td>14h 10m (1 stop)</td>
+                        <td>700$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Newyork</td>
+                        <td>SXR</td>
+                        <td>Etihad Airways</td>
+                        <td>11h 30m</td>
+                        <td>1,500$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>India</td>
+                        <td>DHM</td>
+                        <td>GoAir</td>
+                        <td>15h 15m</td>
+                        <td>2,000$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Maldivs</td>
+                        <td>DED</td>
+                        <td>Qatar Airlines</td>
+                        <td>11h 25m</td>
+                        <td>1,900$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>China</td>
+                        <td>JAI</td>
+                        <td>AirAsia</td>
+                        <td>12h 10m</td>
+                        <td>1,200$</td>
+                        <td><a href="checkout.html" class="book-btn">Book Now</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Add form submission handling
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would trigger an API call to search for flights
+            alert('Searching for flights...');
+        });
+
+        // Add date validation
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Add sorting functionality
+        let priceSortAsc = true;
+        let durationSortAsc = true;
+
+        document.getElementById('sort-price').addEventListener('click', function() {
+            const tbody = document.querySelector('.flight-table tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                const priceA = parseFloat(a.cells[4].textContent.replace(/[^0-9.-]+/g, ''));
+                const priceB = parseFloat(b.cells[4].textContent.replace(/[^0-9.-]+/g, ''));
+                return priceSortAsc ? priceA - priceB : priceB - priceA;
+            });
+            
+            priceSortAsc = !priceSortAsc;
+            this.querySelector('i').className = `fas fa-sort-${priceSortAsc ? 'up' : 'down'}`;
+            
+            rows.forEach(row => tbody.appendChild(row));
+        });
+
+        document.getElementById('sort-duration').addEventListener('click', function() {
+            const tbody = document.querySelector('.flight-table tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                const durationA = parseFloat(a.cells[3].textContent.match(/\d+/)[0]);
+                const durationB = parseFloat(b.cells[3].textContent.match(/\d+/)[0]);
+                return durationSortAsc ? durationA - durationB : durationB - durationA;
+            });
+            
+            durationSortAsc = !durationSortAsc;
+            this.querySelector('i').className = `fas fa-sort-${durationSortAsc ? 'up' : 'down'}`;
+            
+            rows.forEach(row => tbody.appendChild(row));
+        });
+
+        // Add filtering functionality
+        function applyFilters() {
+            const airlineFilter = document.getElementById('airline-filter').value;
+            const stopsFilter = document.getElementById('stops-filter').value;
+            const priceFilter = document.getElementById('price-filter').value;
+            
+            const rows = document.querySelectorAll('.flight-table tbody tr');
+            
+            rows.forEach(row => {
+                const airline = row.cells[2].textContent;
+                const duration = row.cells[3].textContent;
+                const price = parseFloat(row.cells[4].textContent.replace(/[^0-9.-]+/g, ''));
+                
+                const matchesAirline = airlineFilter === 'all' || airline === airlineFilter;
+                const matchesStops = stopsFilter === 'all' || 
+                    (stopsFilter === 'direct' && !duration.includes('stop')) ||
+                    (stopsFilter === '1-stop' && duration.includes('1 stop')) ||
+                    (stopsFilter === '2-stop' && duration.includes('2 stop'));
+                
+                let matchesPrice = true;
+                if (priceFilter !== 'all') {
+                    const [min, max] = priceFilter.split('-').map(v => v === '+' ? Infinity : parseFloat(v));
+                    matchesPrice = price >= min && (max === Infinity || price < max);
+                }
+                
+                row.style.display = matchesAirline && matchesStops && matchesPrice ? '' : 'none';
+            });
+        }
+
+        document.getElementById('airline-filter').addEventListener('change', applyFilters);
+        document.getElementById('stops-filter').addEventListener('change', applyFilters);
+        document.getElementById('price-filter').addEventListener('change', applyFilters);
+    </script>
+</body>
+</html> 

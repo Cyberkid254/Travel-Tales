@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1920&auto=format&fit=crop') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f6ad55;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2d3748;
+            margin: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0.5rem auto;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .guide-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .guide-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .guide-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .guide-card-content {
+            padding: 2rem;
+        }
+
+        .guide-card-content h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .guide-card-content p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: #f6ad55;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ed8936;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+                padding: 0 1rem;
+            }
+
+            .guides-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .guide-card-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .guide-card img {
+                height: 180px;
+            }
+
+            .guide-card-content {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 3rem 0 1.5rem;
+            }
+
+            .guide-card-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .guide-meta {
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Add smooth scrolling for better mobile experience */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Improve touch targets on mobile */
+        @media (max-width: 768px) {
+            .nav-links a,
+            .footer-links a,
+            .btn {
+                padding: 0.8rem 1.5rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Add loading state for images */
+        .guide-card img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .guide-card img.loaded {
+            opacity: 1;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-btn i {
+            font-size: 1.1rem;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.guide-card img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        img.classList.add('loaded');
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="hero-content">
+            <h1>Travel</h1>
+            <p>Expert advice and guides for your next adventure</p>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="travel.html">Travel</a></li>
+                    <li><a href="traveler-stories.html">Traveler Stories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="login-link">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 2rem;">
+        <a href="booking.html" class="back-btn">
+            <i class="fas fa-calendar-alt"></i> Book Your Trip
+        </a>
+    </div>
+
+    <main>
+        <div class="container">
+            <h2 class="section-title">Travel Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop" alt="Paris Guide">
+                    <div class="guide-card-content">
+                        <h3>Ultimate Paris Travel Guide</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
+                                <span>Sarah Johnson</span>
+                            </div>
+                            <span>Updated: May 2023</span>
+                        </div>
+                        <p>Everything you need to know about visiting the City of Light, from the best time to visit to hidden gems off the beaten path.</p>
+                        <a href="destination-details.html?city=paris" class="btn">Read Guide</a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop" alt="Tokyo Guide">
+                    <div class="guide-card-content">
+                        <h3>Tokyo on a Budget</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                                <span>Michael Chen</span>
+                            </div>
+                            <span>Updated: June 2023</span>
+                        </div>
+                        <p>Discover how to experience Tokyo's unique culture and attractions without breaking the bank, including budget accommodations and free activities.</p>
+                        <a href="destination-details.html?city=tokyo" class="btn">Read Guide</a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=800&auto=format&fit=crop" alt="Santorini Guide">
+                    <div class="guide-card-content">
+                        <h3>Santorini: Beyond the Postcards</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Elena Rodriguez">
+                                <span>Elena Rodriguez</span>
+                            </div>
+                            <span>Updated: July 2023</span>
+                        </div>
+                        <p>Explore the authentic side of Santorini, from local villages to secret beaches and the best spots for watching the famous sunset.</p>
+                        <a href="destination-details.html?city=santorini" class="btn">Read Guide</a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2?q=80&w=800&auto=format&fit=crop" alt="New York Guide">
+                    <div class="guide-card-content">
+                        <h3>New York City: First-Timer's Guide</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Wilson">
+                                <span>David Wilson</span>
+                            </div>
+                            <span>Updated: August 2023</span>
+                        </div>
+                        <p>Navigate the Big Apple like a pro with this comprehensive guide for first-time visitors, covering transportation, neighborhoods, and must-see attractions.</p>
+                        <a href="destination-details.html?city=newyork" class="btn">Read Guide</a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=800&auto=format&fit=crop" alt="Cape Town Guide">
+                    <div class="guide-card-content">
+                        <h3>Cape Town Adventure Guide</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Zainab Okonkwo">
+                                <span>Zainab Okonkwo</span>
+                            </div>
+                            <span>Updated: September 2023</span>
+                        </div>
+                        <p>From Table Mountain to the Cape Peninsula, discover the best hiking trails, wildlife encounters, and cultural experiences in South Africa's most vibrant city.</p>
+                        <a href="destination-details.html?city=capetown" class="btn">Read Guide</a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=800&auto=format&fit=crop" alt="Venice Guide">
+                    <div class="guide-card-content">
+                        <h3>Venice: Avoiding the Crowds</h3>
+                        <div class="guide-meta">
+                            <div class="guide-author">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Marco Rossi">
+                                <span>Marco Rossi</span>
+                            </div>
+                            <span>Updated: October 2023</span>
+                        </div>
+                        <p>Learn how to experience the magic of Venice away from the tourist crowds, with tips on timing, lesser-known attractions, and authentic local experiences.</p>
+                        <a href="destination-details.html?city=venice" class="btn">Read Guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Travel Tips</h2>
+            <!-- Add travel tips content here -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="travel-guides.html">Travel Guides</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+            </div>
+            <p><a href="terms-of-use.html">Terms of Use</a></p>
+        </div>
+    </footer>
+    <script src="js/chatbot-widget.js"></script>
+</body>
+</html> 
