@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Tips - Travel Tales</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -351,14 +352,17 @@
             const categoryButtons = document.querySelectorAll('.category-btn');
             
             categoryButtons.forEach(button => {
+                button.setAttribute('aria-label', `Filter by ${button.textContent} category`);
+                
                 button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
                     
-                    // Add active class to clicked button
                     this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
                     
-                    // In a real implementation, this would filter the tips
                     console.log('Filtering by category:', this.textContent);
                 });
             });
@@ -411,7 +415,7 @@
                         <li>Consider alternative airports for potential savings</li>
                     </ul>
                     <div class="tip-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" loading="lazy" onerror="this.src='images/default-avatar.jpg'">
                         <span>Michael Chen, Travel Expert</span>
                     </div>
                 </div>
@@ -510,7 +514,9 @@
                 <a href="index.html">Home</a>
                 <a href="destinations.html">Destinations</a>
                 <a href="travel-guides.html">Travel Guides</a>
-                <a href="about.html">About</a>
+                <a href="travel-tips.html">Travel Tips</a>
+                <a href="traveler-stories.html">Traveler Stories</a>
+                <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
                 <a href="login.html">Login</a>
             </div>

@@ -302,6 +302,29 @@
                 background: rgba(102, 126, 234, 0.1);
                 color: var(--primary-color);
             }
+
+            .chat-widget.js-disabled {
+                display: none;
+            }
+
+            html.js .chat-widget.js-disabled {
+                display: none;
+            }
+
+            html.no-js .chat-widget:not(.js-disabled) {
+                display: none;
+            }
+
+            .offline-message {
+                background: #fff3cd;
+                color: #856404;
+                padding: 12px 16px;
+                border-radius: 15px;
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin-top: 10px;
+                border: 1px solid #ffeeba;
+            }
         `;
         
         const styleElement = document.createElement('style');
@@ -334,7 +357,12 @@
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message bot-message">
-                        Hello! 👋 I'm your Travel Tales assistant. How can I help you today?
+                        Hello! 👋 I'm your Travel Tales assistant. How can I help you plan your perfect trip today?
+                    </div>
+                    <div class="suggestions">
+                        <div class="suggestion-chip" onclick="window.useQuickReply('Show me popular destinations')">Popular destinations</div>
+                        <div class="suggestion-chip" onclick="window.useQuickReply('How to book a trip?')">Book a trip</div>
+                        <div class="suggestion-chip" onclick="window.useQuickReply('Travel tips')">Travel tips</div>
                     </div>
                 </div>
                 <div class="chat-input">
@@ -353,14 +381,19 @@
                         <div class="emoji-btn" onclick="window.addEmoji('❤️')">❤️</div>
                     </div>
                     <div class="chat-actions">
-                        <button class="action-button" onclick="window.toggleEmojiPicker()">
+                        <button class="action-button" onclick="window.toggleEmojiPicker()" aria-label="Open emoji picker">
                             <i class="fas fa-smile"></i>
                         </button>
                     </div>
-                    <input type="text" id="userInput" placeholder="Type your message..." onkeypress="window.handleKeyPress(event)">
-                    <button class="send-button" onclick="window.sendMessage()">
+                    <input type="text" id="userInput" placeholder="Type your message..." onkeypress="window.handleKeyPress(event)" aria-label="Chat message input">
+                    <button class="send-button" onclick="window.sendMessage()" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
+                </div>
+            </div>
+            <div class="chat-widget js-disabled">
+                <div class="offline-message">
+                    Please enable JavaScript to use the chat feature.
                 </div>
             </div>
         `;
@@ -467,23 +500,56 @@
             const indicator = showTypingIndicator();
             
             try {
-                const response = await fetch('api/chatbot.php', {
+                // First check if we're online
+                if (!navigator.onLine) {
+                    throw new Error('You appear to be offline. Please check your internet connection.');
+                }
+
+                const response = await fetch('/api/chatbot.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ message })
+                    body: JSON.stringify({ 
+                        message,
+                        timestamp: new Date().toISOString(),
+                        sessionId: localStorage.getItem('chatSessionId') || createSessionId()
+                    })
                 });
                 
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+                
                 const data = await response.json();
+                
                 setTimeout(() => {
                     hideTypingIndicator(indicator);
-                    addMessage(data.response, false, data.suggestions);
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    addMessage(data.response, false, data.suggestions || []);
                 }, 1000 + Math.random() * 1000);
             } catch (error) {
                 hideTypingIndicator(indicator);
-                addMessage('Sorry, I encountered an error. Please try again.');
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.innerHTML = `
+                    ${error.message || 'Sorry, I encountered an error. Please try again.'}
+                    <button class="retry-button" onclick="window.retryLastMessage()">Retry</button>
+                `;
+                document.getElementById('chatMessages').appendChild(errorMessage);
+                console.error('Chatbot error:', error);
             }
+        }
+    };
+
+    // Retry last message
+    const retryLastMessage = () => {
+        const lastUserMessage = document.querySelector('.user-message:last-of-type');
+        if (lastUserMessage) {
+            document.getElementById('userInput').value = lastUserMessage.textContent;
+            sendMessage();
         }
     };
 
@@ -496,6 +562,9 @@
 
     // Initialize chatbot
     const initChatbot = () => {
+        // Remove no-js class when JavaScript is enabled
+        document.documentElement.classList.remove('no-js');
+        
         // Check if Font Awesome is loaded, if not load it
         if (!document.querySelector('link[href*="font-awesome"]')) {
             const fontAwesome = document.createElement('link');
@@ -531,6 +600,7 @@
         window.addEmoji = addEmoji;
         window.sendMessage = sendMessage;
         window.handleKeyPress = handleKeyPress;
+        window.retryLastMessage = retryLastMessage;
     };
 
     // Initialize when DOM is loaded

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Tales - Your Journey Begins Here</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -615,11 +616,23 @@
         .category-card img {
             opacity: 0;
             transition: opacity 0.3s ease;
+            background-color: #f0f0f0;
         }
 
         .destination-card img.loaded,
         .category-card img.loaded {
             opacity: 1;
+        }
+
+        .destination-card img.error,
+        .category-card img.error {
+            opacity: 1;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
         }
     </style>
     <script>
@@ -631,6 +644,10 @@
                 } else {
                     img.addEventListener('load', function() {
                         img.classList.add('loaded');
+                    });
+                    img.addEventListener('error', function() {
+                        img.classList.add('error');
+                        img.alt = 'Image not available';
                     });
                 }
             });
@@ -798,8 +815,11 @@
                 <a href="index.html">Home</a>
                 <a href="destinations.html">Destinations</a>
                 <a href="travel-guides.html">Travel Guides</a>
-                <a href="about.html">About</a>
+                <a href="travel-tips.html">Travel Tips</a>
+                <a href="traveler-stories.html">Traveler Stories</a>
+                <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
+                <a href="booking.html">Book Now</a>
                 <a href="login.html">Login</a>
             </div>
             <p><a href="terms-of-use.html">Terms of Use</a></p>
